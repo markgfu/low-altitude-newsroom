@@ -28,13 +28,17 @@ python -m lowalt_newsroom topic plan --id esg --batch first-trial --trial
 
 遗漏用`topic feedback`登记，按信源、检索词、执行、筛选或时间窗口诊断；配置修正用`topic update --feedback`关联，再以实际回查关闭。没有证据保持待查，不能只补当期新闻后声称修复。成功批次用`topic finish`保存截止和事件，不自动发布。
 
-详见[多主题操作说明与字段示例](docs/multi_topic.md)及[通用编辑规则](docs/common_editorial_rules.md)。已有`lowalt`主题保留117源、246任务和207个覆盖对象，包括6项飞行汽车独立检索；迁移不把旧记录倒填为本机新流程验收。算力金融用`--preset compute-finance`，其他主题用`--scope`。
+详见[多主题操作说明与字段示例](docs/multi_topic.md)及[通用编辑规则](docs/common_editorial_rules.md)。`lowalt`保留原117源、246任务和207个覆盖对象，包括6项飞行汽车独立检索；新增3个社交入口及任务后为120源、249任务。算力金融当前为25源、23任务。清单含候选和访问受限项，不把数量视作采集成功；迁移不把旧记录倒填为本机验收。新建算力金融配置可用`--preset compute-finance`，其他主题用`--scope`。
+
+社交媒体采集参考本机叙事雷达的公开详情试采方式，新增`social probe/import/feed`，支持公众号详情、RSS/Atom正文及X、小红书等实际可见正文导入；保留正文版本、时间与访问缺口。见[社交信源接入及实测边界](docs/social_sources.md)。这不代表所有平台已经实现实时自动采集。
 
 目录、包名和GitHub地址为兼容继续使用`low-altitude-newsroom`。安装后的通用命令名为`newsroom`，`lowalt-news`继续可用。CLI负责配置、记录与校验，实际检索、写稿和事实核查由编辑或联网Agent执行。
 
 ## 低空配置及兼容入口
 
 双主题成稿范例见[低空经济与算力金融](examples/multi-topic-2026-10-19/README.md)：各含Markdown、HTML及来源和金额口径说明，展示同一流程适配两个主题；选编范例不作为全量日报或试检成功记录。
+
+后续完整清单执行见[2026-10-19两主题检索与待审稿](examples/full-run-2026-10-19/README.md)：低空30条、算力金融13条，附668项实际检索/直读记录、任务表、信源入口访问表及采用证据。665式搜索与3次文章直读均已执行；入口读取、附件、社交正文和分页仍有缺口，未将批次验收为成功或推进正式采集截止。
 
 | 路径 | 用途 |
 |---|---|

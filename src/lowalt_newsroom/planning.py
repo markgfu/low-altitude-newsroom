@@ -4,7 +4,7 @@ import re
 from .workbooks import table_records
 
 STATUSES = {"未执行", "已检有新增", "已检无合格新增", "已发现待核", "读取失败", "不在本轮计划"}
-INSTRUCTION = re.compile(r"^(查数据库|结果少时|当地政府、公报|将行业日报|按原站|主检索与|先核|身份核实)")
+INSTRUCTION = re.compile(r"^(查数据库|结果少时|当地政府、公报|将行业日报|按原站|主检索与|先核|身份核实|只查编制方案|读取文章识别账号|Crossref/OpenAlex/arXiv发现后|按监管、企业、运行拆分|按官方列表追详情)")
 
 
 def supplementary_steps(value: str) -> list[dict]:

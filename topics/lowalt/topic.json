@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "version": 2,
-  "config_hash": "d4b1dc826c51023176f188baa1882d841efe72edc1a03dffaafae2ebf9f0598d",
+  "version": 4,
+  "config_hash": "a5be8bf20bef14a5449cfe8a5f4d00386bf2e580463f8dc25291afc898ed5b84",
   "config": {
     "id": "lowalt",
     "name": "低空经济",
@@ -3314,6 +3314,33 @@
           "RSS订阅URL": "",
           "RSS核验结果": "未确认RSS入口"
         }
+      },
+      {
+        "id": "SOC-X",
+        "name": "X公开帖子",
+        "type": "社交平台线索",
+        "entry": "https://x.com",
+        "method": "主题检索与已知账号/永久链接；实际可见正文或授权导出用social import/feed登记",
+        "status": "candidate",
+        "verification_note": "2026-10-19本机公开GET传输失败；小红书浏览器工具超时，未观察平台页。未取得平台持续采集验收，不判断无更新。"
+      },
+      {
+        "id": "SOC-XHS",
+        "name": "小红书笔记",
+        "type": "社交平台线索",
+        "entry": "https://www.xiaohongshu.com/explore",
+        "method": "主题检索与已知账号/永久链接；实际可见正文或授权导出用social import/feed登记",
+        "status": "candidate",
+        "verification_note": "2026-10-19本机公开GET传输失败；小红书浏览器工具超时，未观察平台页。未取得平台持续采集验收，不判断无更新。"
+      },
+      {
+        "id": "SOC-WX",
+        "name": "微信公众号公开文章",
+        "type": "社交平台线索",
+        "entry": "https://mp.weixin.qq.com",
+        "method": "主题检索与已知账号/永久链接；实际可见正文或授权导出用social import/feed登记",
+        "status": "candidate",
+        "verification_note": "2026-10-19本机公开GET传输失败；小红书浏览器工具超时，未观察平台页。未取得平台持续采集验收，不判断无更新。"
       }
     ],
     "keywords": [
@@ -3575,6 +3602,15 @@
           "动态与补充词": "发布；演示；thrusters；flight；预订；量产；认证；交付",
           "筛选和核验要求": "同义词及主体分条查询；命中逐条登记去向；展示、承诺、认证与交付分开"
         }
+      },
+      {
+        "id": "SOC-K",
+        "label": "社交媒体主题发现",
+        "terms": [
+          "低空经济",
+          "无人机",
+          "eVTOL"
+        ]
       }
     ],
     "tasks": [
@@ -7313,10 +7349,11 @@
           "D01"
         ],
         "queries": [
-          "国证指数网 低空经济 指数",
+          "国证指数网 低空经济 指数"
+        ],
+        "instructions": [
           "只查编制方案、成分、公告，不从新闻推断ETF收益"
         ],
-        "instructions": [],
         "frequency": "每周3",
         "enabled": true,
         "verification": "同时检查原站栏目/RSS；限定搜索只作补充。首页、查询、详情、附件分开记；用于叙事对象与指数关联；指数样本和基金持仓分开。 本轮前入口记录：页面已读。本轮入口请求不代表全站采全；详见10月15日试刊核查附记。",
@@ -7346,10 +7383,11 @@
           "D02"
         ],
         "queries": [
-          "中证指数官网 低空经济 指数",
+          "中证指数官网 低空经济 指数"
+        ],
+        "instructions": [
           "只查编制方案、成分、公告，不从新闻推断ETF收益"
         ],
-        "instructions": [],
         "frequency": "每周3",
         "enabled": true,
         "verification": "同时检查原站栏目/RSS；限定搜索只作补充。首页、查询、详情、附件分开记；已核文件：https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/931855factsheet.pdf 本轮前入口记录：主页仅壳；官方指数PDF已读。本轮入口请求不代表全站采全；详见10月15日试刊核查附记。",
@@ -7413,10 +7451,11 @@
           "W01"
         ],
         "queries": [
-          "https://mp.weixin.qq.com/s/-gl9-01nB8NoBPCTKiZeyg",
+          "https://mp.weixin.qq.com/s/-gl9-01nB8NoBPCTKiZeyg"
+        ],
+        "instructions": [
           "读取文章识别账号；无法读取则保留待核，不能仅凭短链接摘要编稿"
         ],
-        "instructions": [],
         "frequency": "线索触发",
         "enabled": false,
         "verification": "同时检查原站栏目/RSS；限定搜索只作补充。首页、查询、详情、附件分开记；不能把单篇文章URL当作持续采集入口。 本轮前入口记录：先前未能读取正文。本轮入口请求不代表全站采全；详见10月15日试刊核查附记。",
@@ -7446,10 +7485,11 @@
           "W02"
         ],
         "queries": [
-          "https://mp.weixin.qq.com/s/BeFwe4Tgl_qS969QXEYXlw",
+          "https://mp.weixin.qq.com/s/BeFwe4Tgl_qS969QXEYXlw"
+        ],
+        "instructions": [
           "读取文章识别账号；无法读取则保留待核，不能仅凭短链接摘要编稿"
         ],
-        "instructions": [],
         "frequency": "线索触发",
         "enabled": false,
         "verification": "同时检查原站栏目/RSS；限定搜索只作补充。首页、查询、详情、附件分开记；WeRSS已有静态评估和XML兼容记录，尚不代表本账号采集可用。 本轮前入口记录：先前未能读取正文。本轮入口请求不代表全站采全；详见10月15日试刊核查附记。",
@@ -7479,10 +7519,11 @@
           "W03"
         ],
         "queries": [
-          "https://mp.weixin.qq.com/s/RKxhM5eqy8SrOsQ--NuxDQ",
+          "https://mp.weixin.qq.com/s/RKxhM5eqy8SrOsQ--NuxDQ"
+        ],
+        "instructions": [
           "读取文章识别账号；无法读取则保留待核，不能仅凭短链接摘要编稿"
         ],
-        "instructions": [],
         "frequency": "线索触发",
         "enabled": false,
         "verification": "同时检查原站栏目/RSS；限定搜索只作补充。首页、查询、详情、附件分开记；先作为参考样例，不能据此确认其使用自动采集或自动发布。 本轮前入口记录：先前未能读取正文。本轮入口请求不代表全站采全；详见10月15日试刊核查附记。",
@@ -9166,10 +9207,11 @@
           "A06"
         ],
         "queries": [
-          "low-altitude economy economics governance",
+          "low-altitude economy economics governance"
+        ],
+        "instructions": [
           "Crossref/OpenAlex/arXiv发现后追期刊或作者原文"
         ],
-        "instructions": [],
         "frequency": "每日",
         "enabled": true,
         "verification": "预印本标版本，仅读摘要明确读取范围",
@@ -9237,10 +9279,11 @@
           "A06"
         ],
         "queries": [
-          "drone weather risk climate resilience",
+          "drone weather risk climate resilience"
+        ],
+        "instructions": [
           "Crossref/OpenAlex/arXiv发现后追期刊或作者原文"
         ],
-        "instructions": [],
         "frequency": "每日",
         "enabled": true,
         "verification": "预印本标版本，仅读摘要明确读取范围",
@@ -9308,10 +9351,11 @@
           "A06"
         ],
         "queries": [
-          "advanced air mobility airspace governance",
+          "advanced air mobility airspace governance"
+        ],
+        "instructions": [
           "Crossref/OpenAlex/arXiv发现后追期刊或作者原文"
         ],
-        "instructions": [],
         "frequency": "每日",
         "enabled": true,
         "verification": "预印本标版本，仅读摘要明确读取范围",
@@ -9379,10 +9423,11 @@
           "A06"
         ],
         "queries": [
-          "eVTOL noise environmental impact",
+          "eVTOL noise environmental impact"
+        ],
+        "instructions": [
           "Crossref/OpenAlex/arXiv发现后追期刊或作者原文"
         ],
-        "instructions": [],
         "frequency": "每日",
         "enabled": true,
         "verification": "预印本标版本，仅读摘要明确读取范围",
@@ -9450,10 +9495,11 @@
           "A06"
         ],
         "queries": [
-          "drone delivery logistics spatial economics",
+          "drone delivery logistics spatial economics"
+        ],
+        "instructions": [
           "Crossref/OpenAlex/arXiv发现后追期刊或作者原文"
         ],
-        "instructions": [],
         "frequency": "每日",
         "enabled": true,
         "verification": "预印本标版本，仅读摘要明确读取范围",
@@ -9739,10 +9785,11 @@
           "O09"
         ],
         "queries": [
-          "United States FAA eVTOL BVLOS",
+          "United States FAA eVTOL BVLOS"
+        ],
+        "instructions": [
           "按监管、企业、运行拆分；追当地主管部门与企业原文"
         ],
-        "instructions": [],
         "frequency": "每日",
         "enabled": true,
         "verification": "海外论文归学术，参与机会归机会，同一事件只刊一次",
@@ -9774,10 +9821,11 @@
           "S09"
         ],
         "queries": [
-          "Europe EASA U-space eVTOL",
+          "Europe EASA U-space eVTOL"
+        ],
+        "instructions": [
           "按监管、企业、运行拆分；追当地主管部门与企业原文"
         ],
-        "instructions": [],
         "frequency": "每日",
         "enabled": true,
         "verification": "海外论文归学术，参与机会归机会，同一事件只刊一次",
@@ -9807,10 +9855,11 @@
           "O07"
         ],
         "queries": [
-          "UK CAA drone eVTOL",
+          "UK CAA drone eVTOL"
+        ],
+        "instructions": [
           "按监管、企业、运行拆分；追当地主管部门与企业原文"
         ],
-        "instructions": [],
         "frequency": "每日",
         "enabled": true,
         "verification": "海外论文归学术，参与机会归机会，同一事件只刊一次",
@@ -9840,10 +9889,11 @@
           "E09"
         ],
         "queries": [
-          "Australia drone BVLOS operations",
+          "Australia drone BVLOS operations"
+        ],
+        "instructions": [
           "按监管、企业、运行拆分；追当地主管部门与企业原文"
         ],
-        "instructions": [],
         "frequency": "每日",
         "enabled": true,
         "verification": "海外论文归学术，参与机会归机会，同一事件只刊一次",
@@ -9871,10 +9921,11 @@
         ],
         "source_ids": [],
         "queries": [
-          "Singapore CAAS drone advanced air mobility",
+          "Singapore CAAS drone advanced air mobility"
+        ],
+        "instructions": [
           "按监管、企业、运行拆分；追当地主管部门与企业原文"
         ],
-        "instructions": [],
         "frequency": "每周2",
         "enabled": true,
         "verification": "海外论文归学术，参与机会归机会，同一事件只刊一次",
@@ -9902,10 +9953,11 @@
         ],
         "source_ids": [],
         "queries": [
-          "Japan eVTOL drone certification",
+          "Japan eVTOL drone certification"
+        ],
+        "instructions": [
           "按监管、企业、运行拆分；追当地主管部门与企业原文"
         ],
-        "instructions": [],
         "frequency": "每周3",
         "enabled": true,
         "verification": "海外论文归学术，参与机会归机会，同一事件只刊一次",
@@ -9933,10 +9985,11 @@
         ],
         "source_ids": [],
         "queries": [
-          "Korea urban air mobility drone regulation",
+          "Korea urban air mobility drone regulation"
+        ],
+        "instructions": [
           "按监管、企业、运行拆分；追当地主管部门与企业原文"
         ],
-        "instructions": [],
         "frequency": "每周4",
         "enabled": true,
         "verification": "海外论文归学术，参与机会归机会，同一事件只刊一次",
@@ -9964,10 +10017,11 @@
         ],
         "source_ids": [],
         "queries": [
-          "Brazil Canada Middle East eVTOL drone",
+          "Brazil Canada Middle East eVTOL drone"
+        ],
+        "instructions": [
           "按监管、企业、运行拆分；追当地主管部门与企业原文"
         ],
-        "instructions": [],
         "frequency": "每周5",
         "enabled": true,
         "verification": "海外论文归学术，参与机会归机会，同一事件只刊一次",
@@ -10103,10 +10157,11 @@
           "O11"
         ],
         "queries": [
-          "site:www.casa.gov.au drone BVLOS AusSORA",
+          "site:www.casa.gov.au drone BVLOS AusSORA"
+        ],
+        "instructions": [
           "按官方列表追详情；未读全文/附件记录缺口"
         ],
-        "instructions": [],
         "frequency": "每日",
         "enabled": true,
         "verification": "日期、状态、主体和原文核验；单次可读不等于稳定采集",
@@ -10136,10 +10191,11 @@
           "E10"
         ],
         "queries": [
-          "site:www.anratechnologies.com UTM VISTA drone",
+          "site:www.anratechnologies.com UTM VISTA drone"
+        ],
+        "instructions": [
           "按官方列表追详情；未读全文/附件记录缺口"
         ],
-        "instructions": [],
         "frequency": "每日",
         "enabled": true,
         "verification": "日期、状态、主体和原文核验；单次可读不等于稳定采集",
@@ -10169,10 +10225,11 @@
           "E11"
         ],
         "queries": [
-          "site:airspeeder.com Airspeeder race",
+          "site:airspeeder.com Airspeeder race"
+        ],
+        "instructions": [
           "按官方列表追详情；未读全文/附件记录缺口"
         ],
-        "instructions": [],
         "frequency": "每周5",
         "enabled": true,
         "verification": "日期、状态、主体和原文核验；单次可读不等于稳定采集",
@@ -10202,10 +10259,11 @@
           "A12"
         ],
         "queries": [
-          "site:swpuxbskb.cbpt.cnki.net 低空经济 无人机 研究",
+          "site:swpuxbskb.cbpt.cnki.net 低空经济 无人机 研究"
+        ],
+        "instructions": [
           "按官方列表追详情；未读全文/附件记录缺口"
         ],
-        "instructions": [],
         "frequency": "每周3",
         "enabled": true,
         "verification": "日期、状态、主体和原文核验；单次可读不等于稳定采集",
@@ -10235,10 +10293,11 @@
           "A13"
         ],
         "queries": [
-          "site:ncds.cbpt.cnki.net 低空经济 无人机 研究",
+          "site:ncds.cbpt.cnki.net 低空经济 无人机 研究"
+        ],
+        "instructions": [
           "按官方列表追详情；未读全文/附件记录缺口"
         ],
-        "instructions": [],
         "frequency": "每周3",
         "enabled": true,
         "verification": "日期、状态、主体和原文核验；单次可读不等于稳定采集",
@@ -11804,6 +11863,51 @@
           "启用状态": "启用",
           "完成条件与核验边界": "每条主式和补充逐行独立执行；命中须追原始发布并逐条登记采用、待核或不采用原因。演示、量产计划、适航及商业运行分开；未读正文不得刊登，不推断ETF或股价影响。新增2026-10-19。核发言主体及所指企业；SpaceX、Tesla、第三方公司分开。"
         }
+      },
+      {
+        "id": "SOC-X",
+        "keyword_ids": [
+          "SOC-K"
+        ],
+        "source_ids": [
+          "SOC-X"
+        ],
+        "queries": [
+          "site:x.com {term}"
+        ],
+        "frequency": "每日",
+        "enabled": true,
+        "verification": "核对账号身份、帖子发布时间和正文范围；平台定向检索实际返回非本平台结果时，不计作平台覆盖；原始事实回查官方文件或主体声明，访问失败保留缺口。"
+      },
+      {
+        "id": "SOC-XHS",
+        "keyword_ids": [
+          "SOC-K"
+        ],
+        "source_ids": [
+          "SOC-XHS"
+        ],
+        "queries": [
+          "site:xiaohongshu.com {term}"
+        ],
+        "frequency": "每日",
+        "enabled": true,
+        "verification": "核对账号身份、帖子发布时间和正文范围；平台定向检索实际返回非本平台结果时，不计作平台覆盖；原始事实回查官方文件或主体声明，访问失败保留缺口。"
+      },
+      {
+        "id": "SOC-WX",
+        "keyword_ids": [
+          "SOC-K"
+        ],
+        "source_ids": [
+          "SOC-WX"
+        ],
+        "queries": [
+          "site:mp.weixin.qq.com {term}"
+        ],
+        "frequency": "每日",
+        "enabled": true,
+        "verification": "核对账号身份、帖子发布时间和正文范围；平台定向检索实际返回非本平台结果时，不计作平台覆盖；原始事实回查官方文件或主体声明，访问失败保留缺口。"
       }
     ],
     "legacy_objects": [
@@ -14306,6 +14410,20 @@
       "reason": "同步远端v1.6清单，保留新增飞行汽车独立检索",
       "before_hash": "be616c3765a563fd60c962943e20a74e190b9ce4889978fd97ec670d434388fa",
       "after_hash": "d4b1dc826c51023176f188baa1882d841efe72edc1a03dffaafae2ebf9f0598d"
+    },
+    {
+      "version": 3,
+      "time": "2026-10-19T16:51:20.465522+08:00",
+      "reason": "完整清单执行前纠正迁移分类：操作说明移入instructions，保留全部任务、主式与原始记录",
+      "before_hash": "d4b1dc826c51023176f188baa1882d841efe72edc1a03dffaafae2ebf9f0598d",
+      "after_hash": "6ca80c592dd7bc414bf4de912cfb1d0af7d27529525e9634616300f91fedd961"
+    },
+    {
+      "version": 4,
+      "time": "2026-10-19T19:54:23.809287+08:00",
+      "reason": "参考叙事雷达公开详情取证方式，加入社交平台发现任务及正文导入路径",
+      "before_hash": "6ca80c592dd7bc414bf4de912cfb1d0af7d27529525e9634616300f91fedd961",
+      "after_hash": "a5be8bf20bef14a5449cfe8a5f4d00386bf2e580463f8dc25291afc898ed5b84"
     }
   ]
 }

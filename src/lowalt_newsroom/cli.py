@@ -10,6 +10,7 @@ from .planning import STATUSES, build_plan, record_search
 from .rendering import check_draft, render_markdown
 from .workbooks import table_records
 from .topic_cli import add_commands, run as run_topic
+from .social import PLATFORMS, capture, import_feed, probe
 
 
 def write_json(path: str, value: dict) -> None:
@@ -25,6 +26,15 @@ def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description="多主题新闻收集、核查与待审稿辅助工具")
     commands = parser.add_subparsers(dest="command", required=True)
     add_commands(commands)
+    social = commands.add_parser("social", help="社交详情试采或导入实际正文，保留待核状态")
+    social.add_argument("action", choices=["probe", "import", "feed"])
+    social.add_argument("--platform", choices=sorted(PLATFORMS))
+    social.add_argument("--source-id")
+    social.add_argument("--url")
+    social.add_argument("--input", type=Path)
+    social.add_argument("--captured-at")
+    social.add_argument("--timeout", type=float, default=12)
+    social.add_argument("--output", required=True, type=Path)
     inventory = commands.add_parser("inventory", help="列出信源与搜索任务数量")
     inventory.add_argument("--sources", default="data/source_registry.xlsx")
     inventory.add_argument("--checklist", default="data/search_checklist.xlsx")
@@ -57,6 +67,30 @@ def main(argv=None) -> int:
             result, code = run_topic(args)
             print(json.dumps(result, ensure_ascii=False, indent=2))
             return code
+        elif args.command == "social":
+            if not args.output.resolve().is_relative_to(Path("runtime").resolve()):
+                raise ValueError("社交采集结果只能保存到runtime，避免误提交原文和访问链接")
+            if args.input and args.input.resolve() == args.output.resolve():
+                raise ValueError("输出不能覆盖导入原件")
+            if args.action == "probe":
+                if not all([args.url, args.platform, args.source_id]):
+                    raise ValueError("probe需要--url、--platform和--source-id")
+                result = probe(args.url, args.platform, args.source_id, args.timeout)
+            elif args.action == "import":
+                if not args.input:
+                    raise ValueError("import需要--input JSON记录或记录数组")
+                records = json.loads(args.input.read_text(encoding="utf-8-sig"))
+                if isinstance(records, dict):
+                    records = [records]
+                if not isinstance(records, list) or any(not isinstance(x, dict) for x in records):
+                    raise ValueError("输入应为记录对象或对象数组")
+                result = {"documents": [capture(x) for x in records]}
+            else:
+                if not all([args.input, args.platform, args.source_id, args.captured_at]):
+                    raise ValueError("feed需要--input、--platform、--source-id和--captured-at")
+                result = {"items": import_feed(args.input.read_bytes(), args.platform, args.source_id, args.captured_at)}
+            write_json(str(args.output), result)
+            result = {"output": str(args.output), "status": result.get("status", "导入完成，仍需核验"), "published": False}
         elif args.command == "inventory":
             result = {"sources": len(table_records(args.sources, "信源清单", "ID")),
                       "tasks": len(table_records(args.checklist, "检索任务", "任务ID")),
