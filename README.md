@@ -34,6 +34,8 @@ python -m lowalt_newsroom topic plan --id esg --batch first-trial --trial
 
 ## 低空配置及兼容入口
 
+双主题成稿范例见[低空经济与算力金融](examples/multi-topic-2026-10-19/README.md)：各含Markdown、HTML及来源和金额口径说明，展示同一流程适配两个主题；选编范例不作为全量日报或试检成功记录。
+
 | 路径 | 用途 |
 |---|---|
 | `data/source_registry.xlsx` | 2026-10-19信源快照：117个来源，含候选及访问限制 |
