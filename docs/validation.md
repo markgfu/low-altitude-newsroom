@@ -12,7 +12,7 @@
 | RSS实测 | 亿航订阅入口当次返回HTTP403，结果记录为读取失败、0条已解析；不能据此说没有新消息，也不代表其他入口均失败 |
 | 暂存文件检查 | 未检出规则所覆盖的GitHub令牌、私钥、临时签名URL或禁止提交的运行文件；这不是全部秘密类型的形式化保证 |
 
-GitHub Actions配置了Windows/Linux检查，但远端执行尚未发生。没有在本次进行全站分页采集、公众号接入或微信后台发布。示例新闻仍需人工最终审核。
+GitHub Actions已在公开仓库完成Windows/Linux检查，两项任务均成功；包括15项单元测试、待提交文件检查、清单读取和示例稿格式检查。验证提交为`8a6b3bc6f0c64ab39910fe52e16624ed50994fb4`，见[运行记录](https://github.com/markgfu/low-altitude-newsroom/actions/runs/39189570251)。没有在本次进行全站分页采集、公众号接入或微信后台发布。示例新闻仍需人工最终审核。
 
 Actions版本依据官方[setup-python说明](https://github.com/actions/setup-python/blob/main/README.md)及[checkout说明](https://github.com/actions/checkout/blob/main/README.md)核对，使用v7；配置只申请contents: read权限。
 
