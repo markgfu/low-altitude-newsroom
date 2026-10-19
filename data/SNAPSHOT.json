@@ -2,14 +2,14 @@
   "snapshot_date": "2026-10-19",
   "editorial_rules": "1.10",
   "source_registry": "1.11",
-  "search_checklist": "1.5",
+  "search_checklist": "1.6",
   "sources": 117,
-  "tasks": 240,
-  "objects": 204,
-  "note": "快照不是执行成果；当天原179项主检索后追加了任务，按新表重新生成周一计划为187项，不倒填为已执行。",
+  "tasks": 246,
+  "objects": 207,
+  "note": "快照不是执行成果；新增6项飞行汽车独立每日任务，周一计划193项。维护试检18式单独登记，不倒填早上日报、执行模板或成功基线。",
   "files": {
     "data/source_registry.xlsx": "fc75587a08cbf476aeda5ca7921dbf8202a8c7dd0e1802cadd88d885bda87ce7",
-    "data/search_checklist.xlsx": "d4c7fc0e87955d01c02accff2e56f09dbc0ef29a189d4e60d384679266bef3a5",
+    "data/search_checklist.xlsx": "16f77ad4b4c14883c0500a3de51508a1b1ca532b537fb257fdfc05254cc74fcf",
     "docs/editorial_rules.md": "8447b07cdd9cfce0fed2772ed541f0045a3eaadbafafda5540262c936196a2be"
   }
 }

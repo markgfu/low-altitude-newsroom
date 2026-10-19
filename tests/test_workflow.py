@@ -31,12 +31,16 @@ class PlanningTests(unittest.TestCase):
         sources = table_records(ROOT / 'data/source_registry.xlsx', '信源清单', 'ID')
         tasks = table_records(ROOT / 'data/search_checklist.xlsx', '检索任务', '任务ID')
         self.assertEqual(len(sources), 117)
-        self.assertEqual(len(tasks), 240)
+        self.assertEqual(len(tasks), 246)
         self.assertIn('EC12', {x['任务ID'] for x in tasks})
+        new = {x['任务ID']: x for x in tasks if x['任务ID'].startswith('FC')}
+        self.assertEqual(set(new), {'FC01-CN', 'FC01-EN', 'FC02-CN', 'FC02-EN', 'FC03', 'FC04'})
+        self.assertEqual(new['FC03']['主检索式（必做）'], 'Roadster')
+        self.assertTrue(all(x['执行频率'] == '每日' and x['启用状态'] == '启用' for x in new.values()))
 
     def test_plan_is_not_execution(self):
         plan = build_plan(ROOT / 'data/search_checklist.xlsx', date(2026, 10, 19), 'unit')
-        self.assertEqual(sum(x['due'] for x in plan['tasks']), 187)
+        self.assertEqual(sum(x['due'] for x in plan['tasks']), 193)
         self.assertTrue(all(x['searches'] == [] and x['findings'] is None for x in plan['tasks']))
         self.assertTrue(all(x['status'] == '未执行' for x in plan['tasks'] if x['due']))
 
