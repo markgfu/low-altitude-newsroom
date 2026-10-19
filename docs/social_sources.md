@@ -13,7 +13,7 @@
 | 平台 | 发现与获取方式 | 当前边界 |
 |---|---|---|
 | X | 主题检索、明确账号/帖子；实际API导出或浏览器可见正文导入 | 本仓库未部署X API客户端；未取得授权接口样本，不声称全量抓取 |
-| 小红书 | 主题检索、笔记永久链接；登录后实际可见正文导入 | 不将空搜索壳当作无更新；本次浏览器连接超时，未观察到平台页面 |
+| 小红书 | 主题检索、笔记永久链接；登录后实际可见正文导入 | 后续登录复测已见低空经济30个结果卡片；正文读取仍失败，详见下文 |
 | 公众号 | 已知文章URL读取`js_content`；已有WeRSS等系统导出的RSS/Atom正文导入 | 单篇URL不是账号订阅；未配置真实订阅源时不生成虚构feed地址 |
 | 雪球 | 公开详情页明确的`SNOWMAN_STATUS`对象 | 按页面完整性标志处理；无结构或验证页保留失败 |
 | 微博 | 公开详情探测及实际可见正文导入 | 月日时间不补造年份，当前未写通用HTML正文解析器 |
@@ -52,6 +52,23 @@ python -m lowalt_newsroom social feed --platform wechat --source-id W01 --input 
 `body_extent`为full、partial或unknown；导入保留实际正文哈希，强制`fact_verified=false`、`review_status=waiting_review`。采集时间与发布时间独立；无时区、不完整日期不自动换算。`available_at`指该条正文快照实际取得时点，合并历史时保留最早成功快照，不把过去发布日期当作本机当时可得。
 
 RSS/Atom的`content:encoded`或`content`可导入正文，`description`只作线索；取得订阅正文仍不证明全文完整。WeRSS版本和路由可能不同，应使用已部署实例实际导出的文件，不照搬网络示例地址。参考：[WeRSS](https://github.com/letuswerss/werss)、[RSS内容字段问题记录](https://github.com/rachelos/we-mp-rss/issues/432)、[X官方分页说明](https://docs.x.com/xdks/python/pagination)。
+
+## social-source-intake 兼容导入与登录复测
+
+新增离线入口，不要求其他电脑安装本机skill。标准库校验器按用户提供的技能脚本适配，来源内容哈希保存在模块头；不运行独立浏览器，不读取Cookie或隐藏页面状态。
+
+```powershell
+python -m lowalt_newsroom social intake --source-id SOC-XHS --input runtime/social/capture-pack.json --output runtime/social/intake-observation-001.json
+# 有项目明确热度门槛时才追加 --policy runtime/social/heat-policy.json
+```
+
+支持`social-capture-v1`、`social-browser-observation-v1`、`social-intake-batch-v1`。输入包含真实正文、公开帖子链接、带时区观察时间、正文证据及互动数原始显示。完整性声明须附范围；正文哈希不一致、凭证字段和带访问参数的导出链接会拒绝导入。输出仅限`runtime/`，已经存在的观察文件不能覆盖。原始截图、采集包和项目独立profile保存在忽略的`.private-social/`或`runtime/`，不能复制其他项目profile。
+
+点赞、评论、转发、收藏分别保存；“1.2万”等显示不写成精确整数，缺失值保持null。日期只显示月日或相对时间时保留原样，编辑日期与首发日期分开，不能从导入时间反推发布时间。浏览器观察的读取区间、未知的实际DOM时点和原缺口会保留。热度策略缺省为unconfigured；命中阈值仍不自动提升为事实、有效讨论或日报收录。标签/标题单独成文标为缺少独立论述，其余内容依旧待人工复核。
+
+2026-10-19登录后复测：低空经济搜索成功显示30个候选卡片；点击第一条后浏览器读取超时，标签标题/地址显示已进入帖子但没有取得正文。随后公开永久链接显示“当前笔记暂时无法浏览”（300031）。该入口停止；算力金融检索框检查也因浏览器连接超时而未提交查询。详情成功0条，不能以登录成功或卡片数量替代采集成功。详见[独立复测记录](../examples/social-intake-2026-10-19/README.md)。
+
+恢复顺序：先恢复CUA连接，在正常网页确认详情可见；明确拒绝的入口保留停止状态，不换账号/代理或删历史反复访问。若要每天无人值守执行，需单独部署固定采集服务：安装Python Playwright、使用本机已有浏览器、为当前项目建立独立profile并由用户正常登录，再用一条搜索和一篇详情验收。当前只有离线状态检查证据（缺少Playwright），没有后台服务成功记录。X、微博、雪球和公众号各自验证，不推定共享小红书登录状态。
 
 ## 进入日报及遗漏反馈
 

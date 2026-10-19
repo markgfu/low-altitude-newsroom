@@ -10,7 +10,7 @@ from .planning import STATUSES, build_plan, record_search
 from .rendering import check_draft, render_markdown
 from .workbooks import table_records
 from .topic_cli import add_commands, run as run_topic
-from .social import PLATFORMS, capture, import_feed, probe
+from .social import PLATFORMS, capture, import_feed, import_intake, probe
 
 
 def write_json(path: str, value: dict) -> None:
@@ -27,12 +27,13 @@ def main(argv=None) -> int:
     commands = parser.add_subparsers(dest="command", required=True)
     add_commands(commands)
     social = commands.add_parser("social", help="社交详情试采或导入实际正文，保留待核状态")
-    social.add_argument("action", choices=["probe", "import", "feed"])
+    social.add_argument("action", choices=["probe", "import", "feed", "intake"])
     social.add_argument("--platform", choices=sorted(PLATFORMS))
     social.add_argument("--source-id")
     social.add_argument("--url")
     social.add_argument("--input", type=Path)
     social.add_argument("--captured-at")
+    social.add_argument("--policy", type=Path, help="明确配置的平台热度策略；缺省不设门槛")
     social.add_argument("--timeout", type=float, default=12)
     social.add_argument("--output", required=True, type=Path)
     inventory = commands.add_parser("inventory", help="列出信源与搜索任务数量")
@@ -72,10 +73,19 @@ def main(argv=None) -> int:
                 raise ValueError("社交采集结果只能保存到runtime，避免误提交原文和访问链接")
             if args.input and args.input.resolve() == args.output.resolve():
                 raise ValueError("输出不能覆盖导入原件")
+            if args.policy and args.policy.resolve() == args.output.resolve():
+                raise ValueError("输出不能覆盖热度策略")
+            if args.action == "intake" and args.output.exists():
+                raise ValueError("采集观察只追加，不能覆盖已有归档")
             if args.action == "probe":
                 if not all([args.url, args.platform, args.source_id]):
                     raise ValueError("probe需要--url、--platform和--source-id")
                 result = probe(args.url, args.platform, args.source_id, args.timeout)
+            elif args.action == "intake":
+                if not args.input or not args.source_id:
+                    raise ValueError("intake需要--input和--source-id")
+                policy = json.loads(args.policy.read_text(encoding="utf-8-sig")) if args.policy else None
+                result = import_intake(args.input.read_bytes(), args.source_id, policy)
             elif args.action == "import":
                 if not args.input:
                     raise ValueError("import需要--input JSON记录或记录数组")
@@ -89,7 +99,12 @@ def main(argv=None) -> int:
                 if not all([args.input, args.platform, args.source_id, args.captured_at]):
                     raise ValueError("feed需要--input、--platform、--source-id和--captured-at")
                 result = {"items": import_feed(args.input.read_bytes(), args.platform, args.source_id, args.captured_at)}
-            write_json(str(args.output), result)
+            if args.action == "intake":
+                args.output.parent.mkdir(parents=True, exist_ok=True)
+                with args.output.open("x", encoding="utf-8") as stream:
+                    json.dump(result, stream, ensure_ascii=False, indent=2)
+            else:
+                write_json(str(args.output), result)
             result = {"output": str(args.output), "status": result.get("status", "导入完成，仍需核验"), "published": False}
         elif args.command == "inventory":
             result = {"sources": len(table_records(args.sources, "信源清单", "ID")),

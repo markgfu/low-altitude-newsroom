@@ -10,6 +10,7 @@ from urllib.request import Request, urlopen
 import xml.etree.ElementTree as ET
 
 from .feeds import MAX_BYTES, parse_feed, public_url, publication_time
+from .intake_schema import records_from_pack, heat
 
 PLATFORMS = {"x", "xiaohongshu", "wechat", "weibo", "xueqiu"}
 
@@ -81,6 +82,56 @@ def capture(record):
             "available_at": captured, "route": record["route"],
             "sampling_method": record["sampling_method"], "query": record.get("query"),
             "status": "已取得正文待核", "fact_verified": False, "review_status": "waiting_review"}
+
+
+def import_intake(data, source_id, policy=None):
+    """接入技能的真实观察包；结构有效、热度和日报事实验收分开。"""
+    if not isinstance(source_id, str) or not source_id.strip():
+        raise ValueError("intake需要来源ID")
+    if len(data) > MAX_BYTES:
+        raise ValueError("采集包超过大小限制")
+    try:
+        pack = json.loads(data.decode("utf-8-sig"))
+        records = records_from_pack(pack)
+    except (UnicodeError, TypeError, ValueError):
+        raise ValueError("采集包无效；检查结构、正文哈希、计数一致性及敏感字段") from None
+    documents = []
+    for record in records:
+        published = record.get("published") or {}
+        doc = capture({"platform": record["platform"], "source_id": source_id,
+                       "url": record["source_url"], "body": record["text"],
+                       "captured_at": record["observed_at"], "route": record["capture_method"],
+                       "sampling_method": "provided_capture_pack", "title": record.get("title"),
+                       "author": record.get("author"), "query": record.get("query"),
+                       "published_at_raw": published.get("display") or "",
+                       "body_extent": {True: "full", False: "partial", None: "unknown"}[record.get("body_complete")]})
+        # 显示字符串不证明首发时间；只用明确核定为 published 的带时区时刻。
+        doc["published_at_utc"] = (publication_time(published.get("at") or "")
+                                    if published.get("kind") == "published" else None)
+        text_without_tags = re.sub(r"#[^\s#]+", "", record["text"]).strip()
+        no_discussion = (not any(char.isalnum() for char in text_without_tags)
+                         or record["text"].strip() == (record.get("title") or "").strip())
+        doc.update(published=record.get("published"), edited=record.get("edited"),
+                   interactions=record.get("interactions", {}), body_scope=record.get("body_scope"),
+                   evidence=record.get("evidence"), gaps=record.get("gaps", []),
+                   simulation=record.get("simulation", False),
+                   content_review="missing_independent_discussion" if no_discussion else "waiting_review",
+                   theme_status="waiting_review", time_window_status="waiting_review",
+                   heat=heat(record, policy if policy is not None else {"platforms": {}}),
+                   metric_eligible=False, quote_eligible=False, daily_eligible=False,
+                   source_observation=record)
+        # AX转录的读取区间保留原记录；不把导入时钟改作DOM观察时刻。
+        for key in ("observed_interval", "actual_dom_observed_at", "recorded_at"):
+            if key in record:
+                doc[key] = record[key]
+        documents.append(doc)
+    return {"schema_version": "newsroom-social-intake-v1", "documents": documents,
+            "source_pack_sha256": hashlib.sha256(data).hexdigest(),
+            "source_schema": pack.get("schema_version"), "source_status": pack.get("status"),
+            "source_coverage_complete": pack.get("coverage_complete"),
+            "candidates": pack.get("candidates", []), "failures": pack.get("failures", []),
+            "simulation": pack.get("simulation", False) or any(x["simulation"] for x in documents),
+            "accepted": False, "status": "已导入待核" if documents else "无正文；保留原失败记录"}
 
 
 def inspect_html(markup, platform):

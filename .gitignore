@@ -10,6 +10,7 @@ Thumbs.db
 runtime/
 output/
 private/
+.private-social/
 *.log
 *.inspect.ndjson
 *receipt*.json

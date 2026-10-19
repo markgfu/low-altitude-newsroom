@@ -14,7 +14,7 @@ PATTERNS = [
     re.compile(rb'-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----'),
     re.compile(rb'[?&](?:X-Amz-Signature|X-Goog-Signature|sig)=[A-Za-z0-9%+/=]{16,}', re.I),
 ]
-BLOCKED_PARTS = {'private', 'runtime', 'output', '__pycache__', '.venv'}
+BLOCKED_PARTS = {'private', '.private-social', 'runtime', 'output', '__pycache__', '.venv'}
 BLOCKED_NAMES = re.compile(r'(?:^\.env(?:\.|$)|receipt|identity|materialize_result|upload_request|auth\.json)', re.I)
 
 
