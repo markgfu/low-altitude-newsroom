@@ -1,0 +1,12 @@
+{
+  "proposed_scope": "ESG信息披露、环境与社会责任、公司治理、可持续金融及研究；国内与海外",
+  "source_categories": ["监管机构与交易所", "标准制定机构", "企业正式公告与可持续发展报告", "研究机构与期刊", "可信行业媒体"],
+  "proposed_keywords": [
+    {"id": "K01", "label": "披露与治理", "terms": ["ESG", "可持续信息披露", "公司治理", "sustainability disclosure"]},
+    {"id": "K02", "label": "环境与社会", "terms": ["温室气体排放", "生物多样性", "劳动权益", "供应链尽责", "climate disclosure"]},
+    {"id": "K03", "label": "金融", "terms": ["可持续金融", "转型金融", "sustainability-linked financing"]}
+  ],
+  "proposed_sections": ["政策与披露标准", "企业实践与治理", "可持续金融", "研究与报告", "行业机会"],
+  "proposed_checks": ["区分承诺、目标与实际绩效", "区分企业披露、独立鉴证和评级结论", "保留范围、基准年、评级方法与适用市场"],
+  "note": "以上仅为初始化建议，不是已验证信源或已执行查询。先定位并核验来源入口，再把选定词组写入keywords并建立tasks。"
+}

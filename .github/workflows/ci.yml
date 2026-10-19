@@ -25,3 +25,6 @@ jobs:
       - run: python -m lowalt_newsroom check examples/2026-10-19/daily.md
         env:
           PYTHONPATH: src
+      - run: python -m lowalt_newsroom topic plan --id lowalt --batch ci-trial --trial --cutoff 2026-10-19T08:30:00+08:00
+        env:
+          PYTHONPATH: src

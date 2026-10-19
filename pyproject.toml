@@ -4,13 +4,14 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "low-altitude-newsroom"
-version = "0.1.0"
-description = "低空经济新闻收集、核查与待审稿工作流"
+version = "0.2.0"
+description = "多主题日报工作台：配置、采集核查、遗漏反馈与待审稿工作流"
 requires-python = ">=3.11"
 dependencies = []
 
 [project.scripts]
 lowalt-news = "lowalt_newsroom.cli:main"
+newsroom = "lowalt_newsroom.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

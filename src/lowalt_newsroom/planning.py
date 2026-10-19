@@ -63,7 +63,8 @@ def record_search(plan: dict, task_id: str, query: str, evidence: list[str], sta
         raise ValueError("发现数不可为负；未知使用空值")
     task["searches"].append({"time_utc": datetime.now(timezone.utc).isoformat(),
                              "query": query, "evidence_urls": evidence,
-                             "original_urls": originals, "scope_and_gaps": note})
+                             "original_urls": originals, "scope_and_gaps": note,
+                             "status": status, "findings": findings})
     task["status"] = status
     task["findings"] = findings
     urls = {u for search in task["searches"] for u in search["original_urls"]}

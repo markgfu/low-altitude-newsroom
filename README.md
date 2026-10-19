@@ -1,6 +1,6 @@
-# 低空经济新闻工作台
+# 多主题日报工作台
 
-面向低空经济公众号的新闻收集、开放搜索、原文核查和待审稿工作流。
+面向低空经济、算力金融、ESG及自定义主题的新闻收集、开放搜索、原文核查和待审稿工作流。v0.2将通用流程与主题配置分开，保留原低空清单和命令。
 
 这个仓库把每日工作需要的信源、搜索任务、编辑规则与辅助命令放在一起。**联网搜索与事实核验由编辑或具备联网能力的Agent实际执行；命令生成检索计划、保存执行记录、读取订阅和排版，不自动证明新闻已核实。** 最终审稿、核图及公众号发布由账号拥有者在微信官方后台完成。
 
@@ -8,7 +8,31 @@
 
 首次在自己的Codex中运行，请从[START_HERE.md](START_HERE.md)开始。根目录`AGENTS.md`提供项目执行约定。
 
-## 已有内容
+## 新流程：配置、试检、生成、反馈
+
+**明确主题范围 → 填写信源清单 → 填写检索词和任务 → 实际试检 → 生成日报 → 定位遗漏并修正 → 再试检。**
+
+主题配置保存在`topics/<id>/topic.json`，包括范围、信源、词组、检索任务、栏目、专业核验要求和版本。各主题的执行记录、采集截止与去重事件分别存放在`runtime/<id>/`。预设只提供配置建议，真实信源由编辑或Agent定位和验证；新主题不会自动继承低空栏目或全国省级任务。
+
+```powershell
+$env:PYTHONPATH = (Resolve-Path .\src).Path
+python -m lowalt_newsroom topic init --id esg --name "ESG" --preset esg
+python -m lowalt_newsroom topic export --id esg --output runtime/esg/config-edit.json
+# 先填写真实信源，再填keywords和tasks；也可分次保存
+python -m lowalt_newsroom topic update --id esg --config runtime/esg/config-edit.json --expected-version 1 --reason "建立首批信源与查询"
+python -m lowalt_newsroom topic check --id esg
+python -m lowalt_newsroom topic plan --id esg --batch first-trial --trial
+```
+
+空配置不能生成计划，填写完毕也不等于已试检。实际执行并用record登记后，再用`topic accept`验收；正式计划使用`topic plan`。修改配置会使旧试检失效。`{term}`模板把同义词分别展开，增加词后会进入下次计划。
+
+遗漏用`topic feedback`登记，按信源、检索词、执行、筛选或时间窗口诊断；配置修正用`topic update --feedback`关联，再以实际回查关闭。没有证据保持待查，不能只补当期新闻后声称修复。成功批次用`topic finish`保存截止和事件，不自动发布。
+
+详见[多主题操作说明与字段示例](docs/multi_topic.md)及[通用编辑规则](docs/common_editorial_rules.md)。已有`lowalt`主题保留117源、246任务和207个覆盖对象，包括6项飞行汽车独立检索；迁移不把旧记录倒填为本机新流程验收。算力金融用`--preset compute-finance`，其他主题用`--scope`。
+
+目录、包名和GitHub地址为兼容继续使用`low-altitude-newsroom`。安装后的通用命令名为`newsroom`，`lowalt-news`继续可用。CLI负责配置、记录与校验，实际检索、写稿和事实核查由编辑或联网Agent执行。
+
+## 低空配置及兼容入口
 
 | 路径 | 用途 |
 |---|---|
@@ -22,7 +46,7 @@
 
 原始一次性修订脚本依赖本机路径、特定表格行号和旧版本，未纳入可重复执行的生产流程。
 
-## 快速使用
+## 旧低空命令快速使用
 
 需要Python 3.11及以上版本。运行命令没有第三方依赖。
 
@@ -49,7 +73,7 @@ python -m lowalt_newsroom render examples/2026-10-19/daily.md --output output/20
 
 也可执行 `python -m pip install -e .` 安装命令 `lowalt-news`；构建时可能需要下载setuptools。直接使用上面的`PYTHONPATH`方式即可离线运行。
 
-## 每日如何做
+## 低空专业采集要求
 
 1. 更新本地清单和规则；确认上次成功采集截止及已收录事件。
 2. 用`plan`生成本日任务。每日任务与当日每周任务列为未执行，触发任务不自动启用。
@@ -79,7 +103,7 @@ python -m lowalt_newsroom rss --url "https://ir.ehang.com/rss/news-releases.xml"
 
 ## 当前边界
 
-- 已实现：只读清单、按频率生成计划、实际检索记录、RSS2/Atom线索读取、公开稿格式检查、Markdown正文子集到HTML转换和本地图片内嵌。
+- 已实现：多主题初始化、版本修订、词组查询展开、试检门槛、遗漏反馈及回查、按主题交接截止和事件；原只读Excel、按频率计划、检索记录、RSS2/Atom、稿件格式检查和HTML排版继续保留。
 - 需编辑或联网Agent执行：开放互联网搜索、政策/论文/标准全文核验、采购更正跟踪、图像内容与许可检查、写稿及最终审核。
 - 尚未实现：全站分页采集、自动正文抽取、中文付费数据库接入、公众号草稿箱/群发、无人值守日更服务。
 - 两份Excel保留原工作表与ID。已有原生表格筛选范围未覆盖所有后续新增行；本工具读取全部实际行，Excel界面筛选范围仍需另行修复。
@@ -88,5 +112,7 @@ python -m lowalt_newsroom rss --url "https://ir.ehang.com/rss/news-releases.xml"
 ## 更新清单与规则
 
 `data/`是项目整理时的版本快照。持续编辑仍应以账号中当前的主信源文件、搜索清单和编辑规则为准，不能用仓库旧快照覆盖较新文件。更新时保留ID、历史说明、工作表及版本保护，并在`data/SNAPSHOT.json`登记版本和哈希。
+
+使用多主题流程后，主题JSON是该流程的执行配置，Excel是迁移依据。主表有更新时先比对差异，再通过`topic update`合并进主题；不会自动双向同步。主题配置变化、试检结果和单期执行记录分别管理，详见多主题说明。
 
 原始抓取全文、签名下载地址、账号登录态、上传回执和本机浏览器配置不进入Git。研究和图片版权说明见[素材与权限](docs/rights.md)。

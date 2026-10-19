@@ -9,6 +9,7 @@ from .feeds import fetch_feed, public_url
 from .planning import STATUSES, build_plan, record_search
 from .rendering import check_draft, render_markdown
 from .workbooks import table_records
+from .topic_cli import add_commands, run as run_topic
 
 
 def write_json(path: str, value: dict) -> None:
@@ -21,8 +22,9 @@ def write_json(path: str, value: dict) -> None:
 
 
 def main(argv=None) -> int:
-    parser = argparse.ArgumentParser(description="低空新闻收集与待审稿辅助工具")
+    parser = argparse.ArgumentParser(description="多主题新闻收集、核查与待审稿辅助工具")
     commands = parser.add_subparsers(dest="command", required=True)
+    add_commands(commands)
     inventory = commands.add_parser("inventory", help="列出信源与搜索任务数量")
     inventory.add_argument("--sources", default="data/source_registry.xlsx")
     inventory.add_argument("--checklist", default="data/search_checklist.xlsx")
@@ -51,7 +53,11 @@ def main(argv=None) -> int:
     check.add_argument("input", type=Path)
     args = parser.parse_args(argv)
     try:
-        if args.command == "inventory":
+        if args.command == "topic":
+            result, code = run_topic(args)
+            print(json.dumps(result, ensure_ascii=False, indent=2))
+            return code
+        elif args.command == "inventory":
             result = {"sources": len(table_records(args.sources, "信源清单", "ID")),
                       "tasks": len(table_records(args.checklist, "检索任务", "任务ID")),
                       "objects": len(table_records(args.checklist, "覆盖对象", "对象ID"))}
