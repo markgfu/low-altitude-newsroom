@@ -1,0 +1,27 @@
+name: Validate workflow tools
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  test:
+    env:
+      PYTHONUTF8: '1'
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - run: python -m unittest discover -s tests -v
+        env:
+          PYTHONPATH: src
+      - run: python scripts/check_repository.py
+      - run: python -m lowalt_newsroom inventory
+        env:
+          PYTHONPATH: src
+      - run: python -m lowalt_newsroom check examples/2026-10-19/daily.md
+        env:
+          PYTHONPATH: src
