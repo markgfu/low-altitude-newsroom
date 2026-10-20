@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "version": 5,
-  "config_hash": "e4542ab301249dfb9a7e5203a08e15301e29ff92c5fc1cbdb347f4e1e908d647",
+  "version": 7,
+  "config_hash": "5679e8db289cfd264ac6848bfcfc4b372357f89879a9ac41ff6c185d296bb727",
   "config": {
     "id": "lowalt",
     "name": "低空经济",
@@ -745,8 +745,8 @@
         "type": "财经媒体",
         "entry": "https://www.stcn.com/",
         "method": "站内搜索与指定栏目发现",
-        "status": "candidate",
-        "verification_note": "历史状态见legacy；迁移不代表本机已重新验收",
+        "status": "readable",
+        "verification_note": "历史状态见legacy；迁移不代表本机已重新验收 2026-10-20：人民财讯任丽珺10/19 09:12快轮二期开工原稿正文已读，转述呼和浩特发布，未称已投产；https://stcn.com/article/detail/4224611.html。单轮样本不等于持续采集。",
         "legacy": {
           "ID": "M05",
           "接入优先级": "P1",
@@ -2479,10 +2479,10 @@
         "id": "T06",
         "name": "黄冈职业技术大学网站（公告署名黄冈职业技术学院）",
         "type": "高校采购人",
-        "entry": "https://www.hgpu.edu.cn/xwzx/zbgg/content_39817",
+        "entry": "https://www.hgpu.edu.cn/xwzx/zbgg_1",
         "method": "官网公告＋项目号搜索",
-        "status": "candidate",
-        "verification_note": "历史状态见legacy；迁移不代表本机已重新验收",
+        "status": "limited",
+        "verification_note": "历史状态见legacy；迁移不代表本机已重新验收 2026-10-20：公开目录第1、2页及10/19图审和测绘二次询价与对应终止正文已读；尾斜杠目录工具返回9月缓存，_1页面可见10/19最新记录。直接GET详情503与网页工具正文可读分记；未调用带验证码的站内搜索，询价函及全量分页未验收。",
         "legacy": {
           "ID": "T06",
           "接入优先级": "P1",
@@ -2501,7 +2501,10 @@
           "核查日期": "2026-10-16T00:00:00.000Z",
           "RSS订阅URL": "",
           "RSS核验结果": "未确认RSS"
-        }
+        },
+        "previous_entries": [
+          "https://www.hgpu.edu.cn/xwzx/zbgg/content_39817"
+        ]
       },
       {
         "id": "M11",
@@ -2563,10 +2566,10 @@
         "id": "A15",
         "name": "Transportation Research Record（Sage期刊原站）",
         "type": "学术期刊",
-        "entry": "https://journals.sagepub.com/doi/full/10.1177/03611981261481520",
-        "method": "期刊原站＋Crossref发现",
-        "status": "candidate",
-        "verification_note": "历史状态见legacy；迁移不代表本机已重新验收",
+        "entry": "https://journals.sagepub.com/home/trr",
+        "method": "Crossref与公开搜索发现，追DOI原站摘要、正文及许可",
+        "status": "limited",
+        "verification_note": "2026-10-20：Sage文章10.1177/03611981261481520在线首发9/30；网页读取工具取得摘要、方法、结论及局限；直接HTTP403，停止受影响入口；原图HTTP403未纳入稿件。期刊首页未验收，RSS/API不编造。 2026-10-20复核：A23与A15为同一期刊，统一使用A15，历史样本及原说明保留。",
         "legacy": {
           "ID": "A15",
           "接入优先级": "P1",
@@ -2585,7 +2588,11 @@
           "核查日期": "2026-10-16T00:00:00.000Z",
           "RSS订阅URL": "",
           "RSS核验结果": "未确认RSS/API权限"
-        }
+        },
+        "sample_article_url": "https://journals.sagepub.com/doi/full/10.1177/03611981261481520",
+        "aliases": [
+          "A23"
+        ]
       },
       {
         "id": "L14",
@@ -2986,7 +2993,7 @@
         "entry": "https://www.ln.gov.cn/",
         "method": "开放搜索结合原站目录，按原始日期发现",
         "status": "candidate",
-        "verification_note": "历史状态见legacy；迁移不代表本机已重新验收",
+        "verification_note": "历史状态见legacy；迁移不代表本机已重新验收 2026-10-20：省政府县域规划正文及4张附表已读；网页PubDate为10/19、落款10/15，专栏2列法库通用航空装备。https://www.ln.gov.cn/web/zwgkx/zfwj/szfbgtwj/2026n/2026101915441826587/index.shtml。仍未验收全部目录与附件。",
         "legacy": {
           "ID": "L18",
           "接入优先级": "P1",
@@ -3367,7 +3374,31 @@
         "entry": "https://journals.sagepub.com/home/trr",
         "method": "Crossref与公开搜索发现，追DOI原站摘要、正文及许可",
         "status": "limited",
-        "verification_note": "2026-10-20：Sage文章10.1177/03611981261481520在线首发9/30；网页读取工具取得摘要、方法、结论及局限；直接HTTP403，停止受影响入口；原图HTTP403未纳入稿件。期刊首页未验收，RSS/API不编造。"
+        "verification_note": "2026-10-20：Sage文章10.1177/03611981261481520在线首发9/30；网页读取工具取得摘要、方法、结论及局限；直接HTTP403，停止受影响入口；原图HTTP403未纳入稿件。期刊首页未验收，RSS/API不编造。 2026-10-20：历史别名行，归并A15，保留ID与原历史，不独立计源或关联任务。",
+        "alias_of": "A15",
+        "count_as_source": false
+      },
+      {
+        "id": "L19",
+        "name": "中国雄安官网（雄安新区党工委、管委会主办）",
+        "type": "地方政府",
+        "entry": "https://www.xiongan.gov.cn/",
+        "method": "首页通知公告及政府信息公开目录，开放搜索追正式通告",
+        "status": "readable",
+        "discovered_at": "2026-10-20",
+        "verified_at": "2026-10-20",
+        "verification_note": "2026-10-20：首页页脚主办单位及通知公告目录、10/19低慢小通告完整正文已读。https://www.xiongan.gov.cn/20261019/968b7fc7584342938b7638f4d7b9ed35/c.html。禁飞自10/21开始，保留例外；单轮样本不代表持续采集验收，RSS未知。"
+      },
+      {
+        "id": "M16",
+        "name": "长沙晚报／长沙晚报网",
+        "type": "地方权威媒体",
+        "entry": "https://www.icswb.com/",
+        "method": "原站目录与记者署名采访，追政府或企业正式发布补核",
+        "status": "limited",
+        "discovered_at": "2026-10-20",
+        "verified_at": "2026-10-20",
+        "verification_note": "2026-10-20：首页HTTP200、长沙晚报集团栏目及记者李金10/19 16:49签约采访正文已读；https://gxlg.icswb.com/h/100104/20261019/1000358.html。百万级订单归属校方，合同原件和完整签约主体未读，不当交付；连续发现及RSS未验收。"
       }
     ],
     "keywords": [
@@ -3781,7 +3812,9 @@
         "keyword_ids": [
           "K01"
         ],
-        "source_ids": [],
+        "source_ids": [
+          "L19"
+        ],
         "queries": [
           "河北 低空经济 政策",
           "河北 无人驾驶航空器 通知",
@@ -3813,7 +3846,9 @@
         "keyword_ids": [
           "K02"
         ],
-        "source_ids": [],
+        "source_ids": [
+          "L19"
+        ],
         "queries": [
           "河北 场景创新 应用 方案",
           "河北 场景开放 政策",
@@ -9304,7 +9339,7 @@
           "A04",
           "A05",
           "A06",
-          "A23"
+          "A15"
         ],
         "queries": [
           "drone weather risk climate resilience"
@@ -9449,7 +9484,7 @@
           "A04",
           "A05",
           "A06",
-          "A23"
+          "A15"
         ],
         "queries": [
           "eVTOL noise environmental impact"
@@ -10153,7 +10188,8 @@
           "R01",
           "R02",
           "R03",
-          "R04"
+          "R04",
+          "M16"
         ],
         "queries": [
           "低空经济 日报 政策 企业 招标"
@@ -14427,6 +14463,30 @@
         "入口状态": "Tesla官方产品入口已定位；可读内容有限，发布会原始视频待核",
         "登记依据": "2026-10-19；https://www.tesla.com/roadster",
         "关注内容与边界": "Roadster单独检索后筛相关性；区分Performance、Thrust、Rocket版本，预订不当交付，短时腾空不写商业载客"
+      },
+      {
+        "对象ID": "G-CXA01",
+        "类别": "政府与地区",
+        "名称": "雄安新区",
+        "地区或市场": "河北雄安新区",
+        "覆盖环节": "空域安全、通告与地方项目",
+        "检查频率": "随GP03-A、GP03-B每日",
+        "关联信源ID": "L19",
+        "入口状态": "官方首页目录及通告样本已读",
+        "登记依据": "2026-10-20；https://www.xiongan.gov.cn/",
+        "关注内容与边界": "临时限制起止及例外；不从地方通告推断全国空域开放"
+      },
+      {
+        "对象ID": "M-CSWB",
+        "类别": "媒体与行业观察",
+        "名称": "长沙晚报",
+        "地区或市场": "湖南长沙",
+        "覆盖环节": "低空项目采访、校企转化、人才与应用",
+        "检查频率": "随MC01每日查漏",
+        "关联信源ID": "M16",
+        "入口状态": "首页与原始采访样本已读；持续采集待验收",
+        "登记依据": "2026-10-20；https://www.icswb.com/",
+        "关注内容与边界": "保留受访者归属；签约、订单与交付分开"
       }
     ],
     "migration_note": "原Excel保持只读快照；本主题迁移后以JSON为运行配置。较新主表应核对差异后用update更新，不覆盖修订历史。"
@@ -14464,6 +14524,20 @@
       "reason": "补充Archer、Electra与TRR原始来源及实读边界；关联既有任务，不改检索词或查询",
       "before_hash": "a5be8bf20bef14a5449cfe8a5f4d00386bf2e580463f8dc25291afc898ed5b84",
       "after_hash": "e4542ab301249dfb9a7e5203a08e15301e29ff92c5fc1cbdb347f4e1e908d647"
+    },
+    {
+      "version": 6,
+      "time": "2026-10-20T09:54:55.968931+08:00",
+      "reason": "将TRR重复入口A23归并既有A15，保留别名ID及历史，查询不变",
+      "before_hash": "e4542ab301249dfb9a7e5203a08e15301e29ff92c5fc1cbdb347f4e1e908d647",
+      "after_hash": "34ee0284b33c641a13c9ace203909924e414dfbc3884010aa3b2ea61a854f321"
+    },
+    {
+      "version": 7,
+      "time": "2026-10-20T10:06:37.547839+08:00",
+      "reason": "补中国雄安官网及长沙晚报原始入口，记录辽宁附表和黄冈分页实读边界，关联既有任务",
+      "before_hash": "34ee0284b33c641a13c9ace203909924e414dfbc3884010aa3b2ea61a854f321",
+      "after_hash": "5679e8db289cfd264ac6848bfcfc4b372357f89879a9ac41ff6c185d296bb727"
     }
   ]
 }
