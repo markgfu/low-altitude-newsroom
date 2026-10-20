@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "version": 4,
-  "config_hash": "a5be8bf20bef14a5449cfe8a5f4d00386bf2e580463f8dc25291afc898ed5b84",
+  "version": 5,
+  "config_hash": "e4542ab301249dfb9a7e5203a08e15301e29ff92c5fc1cbdb347f4e1e908d647",
   "config": {
     "id": "lowalt",
     "name": "低空经济",
@@ -3341,6 +3341,33 @@
         "method": "主题检索与已知账号/永久链接；实际可见正文或授权导出用social import/feed登记",
         "status": "candidate",
         "verification_note": "2026-10-19本机公开GET传输失败；小红书浏览器工具超时，未观察平台页。未取得平台持续采集验收，不判断无更新。"
+      },
+      {
+        "id": "E18",
+        "name": "Archer Aviation官方新闻与企业署名发行稿",
+        "type": "境外企业",
+        "entry": "https://www.archer.com/news",
+        "method": "官网目录及企业署名Business Wire发行稿交叉核验",
+        "status": "limited",
+        "verification_note": "2026-10-20：官网目录0行可读；Archer署名Business Wire完整新闻稿已读，原始2026-10-19T12:00:00Z；https://www.businesswire.com/news/home/20261019400459/en/Archer-Completes-Historic-Electric-Air-Taxi-Flights-Over-San-Francisco-Bay。目录连续发现与RSS未确认，不标稳定。"
+      },
+      {
+        "id": "E19",
+        "name": "Electra官方新闻",
+        "type": "境外企业",
+        "entry": "https://electra.aero/news",
+        "method": "官方新闻目录、文章日期及正文；开放搜索补漏",
+        "status": "readable",
+        "verification_note": "2026-10-20：官方目录与10/19挪威五场址演示计划正文已读；https://electra.aero/news/five-norwegian-sites-selected-to-host-hybrid-electric-aircraft-demonstrations-in-2027。仅单轮样本，不代表持续采集；RSS未知。"
+      },
+      {
+        "id": "A23",
+        "name": "Transportation Research Record（Sage）",
+        "type": "学术期刊",
+        "entry": "https://journals.sagepub.com/home/trr",
+        "method": "Crossref与公开搜索发现，追DOI原站摘要、正文及许可",
+        "status": "limited",
+        "verification_note": "2026-10-20：Sage文章10.1177/03611981261481520在线首发9/30；网页读取工具取得摘要、方法、结论及局限；直接HTTP403，停止受影响入口；原图HTTP403未纳入稿件。期刊首页未验收，RSS/API不编造。"
       }
     ],
     "keywords": [
@@ -9276,7 +9303,8 @@
         "source_ids": [
           "A04",
           "A05",
-          "A06"
+          "A06",
+          "A23"
         ],
         "queries": [
           "drone weather risk climate resilience"
@@ -9420,7 +9448,8 @@
         "source_ids": [
           "A04",
           "A05",
-          "A06"
+          "A06",
+          "A23"
         ],
         "queries": [
           "eVTOL noise environmental impact"
@@ -9525,7 +9554,9 @@
         "keyword_ids": [
           "K05"
         ],
-        "source_ids": [],
+        "source_ids": [
+          "E18"
+        ],
         "queries": [
           "eVTOL 取证"
         ],
@@ -9782,7 +9813,8 @@
           "K10"
         ],
         "source_ids": [
-          "O09"
+          "O09",
+          "E18"
         ],
         "queries": [
           "United States FAA eVTOL BVLOS"
@@ -9818,7 +9850,8 @@
         "source_ids": [
           "O10",
           "S08",
-          "S09"
+          "S09",
+          "E19"
         ],
         "queries": [
           "Europe EASA U-space eVTOL"
@@ -14424,6 +14457,13 @@
       "reason": "参考叙事雷达公开详情取证方式，加入社交平台发现任务及正文导入路径",
       "before_hash": "6ca80c592dd7bc414bf4de912cfb1d0af7d27529525e9634616300f91fedd961",
       "after_hash": "a5be8bf20bef14a5449cfe8a5f4d00386bf2e580463f8dc25291afc898ed5b84"
+    },
+    {
+      "version": 5,
+      "time": "2026-10-20T09:35:10.497576+08:00",
+      "reason": "补充Archer、Electra与TRR原始来源及实读边界；关联既有任务，不改检索词或查询",
+      "before_hash": "a5be8bf20bef14a5449cfe8a5f4d00386bf2e580463f8dc25291afc898ed5b84",
+      "after_hash": "e4542ab301249dfb9a7e5203a08e15301e29ff92c5fc1cbdb347f4e1e908d647"
     }
   ]
 }
