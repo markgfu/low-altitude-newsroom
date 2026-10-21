@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "version": 8,
-  "config_hash": "eee8025318b2f69b4384ebf9f306f47c4832135f5b241e35638bd1a2fdc16932",
+  "version": 9,
+  "config_hash": "d5da1ec3ffa8648c34a48238fa036e93d23c989523e31e143e3665d025c99339",
   "config": {
     "id": "lowalt",
     "name": "低空经济",
@@ -105,7 +105,7 @@
         "entry": "https://www.miit.gov.cn/",
         "method": "列表页发现文章链接，关键词筛选",
         "status": "candidate",
-        "verification_note": "历史状态见legacy；迁移不代表本机已重新验收",
+        "verification_note": "历史状态见legacy；迁移不代表本机已重新验收 2026-10-21：10/19百城千园行及5G扬帆两份通知相关正文已读，标题不含低空；后者网页工具失败但直接HTTP200并已读正文，附件指标未读。",
         "legacy": {
           "ID": "O03",
           "接入优先级": "P0",
@@ -2344,8 +2344,8 @@
         "type": "国家部门",
         "entry": "https://aqygzj.mofcom.gov.cn/",
         "method": "官方目录＋开放搜索",
-        "status": "candidate",
-        "verification_note": "历史状态见legacy；迁移不代表本机已重新验收",
+        "status": "readable",
+        "verification_note": "历史状态见legacy；迁移不代表本机已重新验收 2026-10-21：已读10/19第49号公告及答记者问正式正文，11/18实施；未将出口管制文件归技术标准。开放行业日报查漏命中后追原文，既有出口管制词未机械增补。https://www.mofcom.gov.cn/zcfb/dwmygl/art/2026/art_6476d897af164126a97baf440726d538.html",
         "legacy": {
           "ID": "O12",
           "接入优先级": "P1",
@@ -2364,7 +2364,8 @@
           "核查日期": "2026-10-16T00:00:00.000Z",
           "RSS订阅URL": "",
           "RSS核验结果": "未确认RSS/API，不编造"
-        }
+        },
+        "verified_at": "2026-10-21"
       },
       {
         "id": "E12",
@@ -3402,6 +3403,88 @@
         "discovered_at": "2026-10-20",
         "verified_at": "2026-10-20",
         "verification_note": "2026-10-20：首页HTTP200、长沙晚报集团栏目及记者李金10/19 16:49签约采访正文已读；https://gxlg.icswb.com/h/100104/20261019/1000358.html。百万级订单归属校方，合同原件和完整签约主体未读，不当交付；连续发现及RSS未验收。"
+      },
+      {
+        "id": "E20",
+        "name": "Reliable Robotics",
+        "type": "企业",
+        "entry": "https://reliable.co/",
+        "method": "公开目录与开放搜索发现，追原文并保留读取边界",
+        "status": "readable",
+        "discovered_at": "2026-10-21",
+        "verified_at": "2026-10-21",
+        "sample_article_url": "https://www.businesswire.com/news/home/20261020103258/en/",
+        "verification_note": "首页200；10/20企业署名Business Wire融资通稿完整相关正文已读。新增1.15亿美元含2500万美元贷款，D轮累计2.75亿美元；认证仍推进中。直接GET通稿307与网页工具可读分记；RSS未知。 单轮样本不代表可稳定持续采集。"
+      },
+      {
+        "id": "E21",
+        "name": "Skyfly Technologies Ltd",
+        "type": "企业",
+        "entry": "https://skyfly.aero/about/",
+        "method": "公开目录与开放搜索发现，追原文并保留读取边界",
+        "status": "limited",
+        "discovered_at": "2026-10-21",
+        "verified_at": "2026-10-21",
+        "sample_article_url": "https://skyfly.aero/evtol-pioneer-skyfly-lands-10-million-to-bring-personal-vertical-flight-to-market/",
+        "verification_note": "官网About及10/20融资原稿相关正文已读：1000万美元种子轮、2027交付为计划。直接HTTP About403后停止该请求路径；网页读取可用。实验许可不当型号或商业运行批准，未独立核MOSAIC法律条款，不作监管结论；RSS未知。 单轮样本不代表可稳定持续采集。"
+      },
+      {
+        "id": "E22",
+        "name": "Matternet Inc.",
+        "type": "企业",
+        "entry": "https://investor.matternet.com/",
+        "method": "公开目录与开放搜索发现，追原文并保留读取边界",
+        "status": "readable",
+        "discovered_at": "2026-10-21",
+        "verified_at": "2026-10-21",
+        "sample_article_url": "https://investor.matternet.com/news-events/press-releases/detail/122/matternet-expands-nhs-drone-delivery-network-to-great-ormond-street-hospital",
+        "verification_note": "IR主页及10/20 Great Ormond Street Hospital原稿相关正文已读，07:00 EDT；已启动样本运输归属企业披露。效率最高90%为企业自述，不作独立成效评价。RSS按本轮实际解析结果补记。 单轮样本不代表可稳定持续采集。 本轮RSS HTTP200，10条解析；仅当次样本。",
+        "rss_url": "https://investor.matternet.com/rss-news-feed",
+        "rss_verification": {
+          "source_id": "E22",
+          "url": "https://investor.matternet.com/rss-news-feed",
+          "at": "2026-10-21T01:36:24.011834+00:00",
+          "status": 200,
+          "sha256": "59319a6b860f90097422acd332507c694530b961aab7be77a14fa5be6b19e4f8",
+          "parsed_items": 10,
+          "parse_status": "parsed"
+        }
+      },
+      {
+        "id": "M17",
+        "name": "广州日报／大洋网",
+        "type": "地方权威媒体",
+        "entry": "https://news.dayoo.com/",
+        "method": "公开目录与开放搜索发现，追原文并保留读取边界",
+        "status": "readable",
+        "discovered_at": "2026-10-21",
+        "verified_at": "2026-10-21",
+        "sample_article_url": "https://gzdaily.dayoo.com/pc/html/2026-10/21/content_866_916547.htm",
+        "verification_note": "主页200；10/21 A1广州政府常务会议记者原稿已读，事件为20日下午。只报道会议部署，不宣称条例当天发布或生效；图片页有不得转载提示，未采用报纸图片。 单轮样本不代表可稳定持续采集。"
+      },
+      {
+        "id": "M18",
+        "name": "上海工商外国语职业学院官网（报道涉及上海思博职业技术学院）",
+        "type": "高校原始发布",
+        "entry": "https://www.sicfl.edu.cn/",
+        "method": "公开目录与开放搜索发现，追原文并保留读取边界",
+        "status": "limited",
+        "discovered_at": "2026-10-21",
+        "verified_at": "2026-10-21",
+        "sample_article_url": "https://www.sicfl.edu.cn/2026/1020/c2300a58766/page.htm",
+        "verification_note": "主页/正文/原图200且已读；原文10/20刊发、活动10/16。页脚主办名称为上海工商外国语职业学院，正文专委会决定及合作团队写思博，未推断两校法律关系；投资为校方披露。样本不等于连续采集，RSS未知。 单轮样本不代表可稳定持续采集。"
+      },
+      {
+        "id": "L20",
+        "name": "黑龙江省人民政府门户网站",
+        "type": "地方政府",
+        "entry": "https://www.hlj.gov.cn/",
+        "method": "公开目录与开放搜索发现，追原文并保留读取边界",
+        "status": "limited",
+        "discovered_at": "2026-10-21",
+        "verified_at": "2026-10-21",
+        "sample_article_url": "https://www.hlj.gov.cn/hlj/c107858/202610/c00_31986040.shtml",
+        "verification_note": "详情网页正文可读，来源人民网黑龙江频道记者张齐；10/20 21:27为门户刊载时间，原人民网稿日期未追到。11座机场与2800余架次均累计口径，不能当20日新增。直接主页403停止该路径；不推定全站不可读，RSS未知。 单轮样本不代表可稳定持续采集。"
       }
     ],
     "keywords": [
@@ -4139,7 +4222,9 @@
         "keyword_ids": [
           "K01"
         ],
-        "source_ids": [],
+        "source_ids": [
+          "L20"
+        ],
         "queries": [
           "黑龙江 低空经济 政策",
           "黑龙江 无人驾驶航空器 通知",
@@ -4171,7 +4256,9 @@
         "keyword_ids": [
           "K02"
         ],
-        "source_ids": [],
+        "source_ids": [
+          "L20"
+        ],
         "queries": [
           "黑龙江 场景创新 应用 方案",
           "黑龙江 场景开放 政策",
@@ -6004,7 +6091,9 @@
         "keyword_ids": [
           "K03"
         ],
-        "source_ids": [],
+        "source_ids": [
+          "M17"
+        ],
         "queries": [
           "广州 低空 飞服 起降",
           "广州 无人机 航线 运营",
@@ -9593,7 +9682,9 @@
           "K05"
         ],
         "source_ids": [
-          "E18"
+          "E18",
+          "E20",
+          "E21"
         ],
         "queries": [
           "eVTOL 取证"
@@ -9754,7 +9845,9 @@
         "keyword_ids": [
           "K05"
         ],
-        "source_ids": [],
+        "source_ids": [
+          "E22"
+        ],
         "queries": [
           "无人机 巡检 运营"
         ],
@@ -9786,7 +9879,9 @@
         "keyword_ids": [
           "K05"
         ],
-        "source_ids": [],
+        "source_ids": [
+          "L20"
+        ],
         "queries": [
           "低空 公司 项目"
         ],
@@ -9818,7 +9913,9 @@
         "keyword_ids": [
           "K05"
         ],
-        "source_ids": [],
+        "source_ids": [
+          "M18"
+        ],
         "queries": [
           "无人机 运维 招聘"
         ],
@@ -9852,7 +9949,9 @@
         ],
         "source_ids": [
           "O09",
-          "E18"
+          "E18",
+          "E20",
+          "E22"
         ],
         "queries": [
           "United States FAA eVTOL BVLOS"
@@ -9923,7 +10022,9 @@
           "K10"
         ],
         "source_ids": [
-          "O07"
+          "O07",
+          "E21",
+          "E22"
         ],
         "queries": [
           "UK CAA drone eVTOL"
@@ -10192,7 +10293,10 @@
           "R02",
           "R03",
           "R04",
-          "M16"
+          "M16",
+          "M17",
+          "M18",
+          "L20"
         ],
         "queries": [
           "低空经济 日报 政策 企业 招标"
@@ -14548,6 +14652,13 @@
       "reason": "提高政策与企业实质进展选稿优先级；采购合并去重并保留完整采集核查",
       "before_hash": "5679e8db289cfd264ac6848bfcfc4b372357f89879a9ac41ff6c185d296bb727",
       "after_hash": "eee8025318b2f69b4384ebf9f306f47c4832135f5b241e35638bd1a2fdc16932"
+    },
+    {
+      "version": 9,
+      "time": "2026-10-21T09:37:05.830131+08:00",
+      "reason": "补充英国与美国企业原始发布及地方原稿入口，记录出口管制文件、RSS和访问边界，查询不变",
+      "before_hash": "eee8025318b2f69b4384ebf9f306f47c4832135f5b241e35638bd1a2fdc16932",
+      "after_hash": "d5da1ec3ffa8648c34a48238fa036e93d23c989523e31e143e3665d025c99339"
     }
   ]
 }
