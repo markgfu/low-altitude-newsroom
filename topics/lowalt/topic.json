@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "version": 10,
-  "config_hash": "cc4935c8c9e3eca7fb198e2ca738ab4e840ab21f0b7702ea2a656f9334c44501",
+  "version": 11,
+  "config_hash": "79109c5fae104a070ab41ce41d054ef462de5348769c662188b5a7a21570cce3",
   "config": {
     "id": "lowalt",
     "name": "低空经济",
@@ -3596,6 +3596,73 @@
         "verified_at": "2026-10-22",
         "verification_note": "发现/核查2026-10-22。首页、身份页脚及10/20 11:39:42现场稿已读；跟踪飞行汽车跨界企业，性能数字保留发布方归属；RSS单次获取另验，不默认为持续采集。仅单轮样本，连续采集、分页和RSS/API未全面验收。证据：https://www.ithome.com/1/015/224.htm RSS实际状态：200；解析条数：60。",
         "rss_url": "https://www.ithome.com/rss/"
+      },
+      {
+        "id": "L36",
+        "name": "广东省通信管理局",
+        "entry": "https://gdca.miit.gov.cn/zwgk/tzgg/index.html",
+        "type": "政府部门",
+        "method": "官方公告与可公开附件、定向检索",
+        "status": "readable",
+        "verification_note": "2026-11-11已读低空智联网地方标准送审稿征求意见公告；公告与附件分别核验。"
+      },
+      {
+        "id": "L41",
+        "name": "上海市奉贤区人民政府门户",
+        "type": "机构原始发布",
+        "entry": "https://www.fengxian.gov.cn/",
+        "method": "官方网页栏目、正文、索引搜索；未配置RSS",
+        "status": "readable",
+        "verification_note": "2026-11-13已读奉贤综保区跨境商品无人机配送试点原文。"
+      },
+      {
+        "id": "L42",
+        "name": "北京市应急管理局建议提案办理",
+        "type": "机构原始发布",
+        "entry": "https://yjglj.beijing.gov.cn/col/col9726/index.html",
+        "method": "官方网页栏目、正文、索引搜索；未配置RSS",
+        "status": "readable",
+        "verification_note": "2026-11-13已读山区无人机应急救援提案答复；区分答复落款与网站公开日期。"
+      },
+      {
+        "id": "O21",
+        "name": "SESAR Joint Undertaking 文献库",
+        "type": "欧洲公共研究机构",
+        "entry": "https://www.sesarju.eu/search-content/documents",
+        "method": "公开目录、原文和定向检索",
+        "status": "readable",
+        "verification_note": "2026-11-12已读U-space运行概念第5版发布说明、文献详情及PDF；区分首发和入库时间。"
+      },
+      {
+        "id": "O22",
+        "name": "欧盟委员会交通总司新闻",
+        "type": "机构原始发布",
+        "entry": "https://transport.ec.europa.eu/news-events/news_en",
+        "method": "官方网页栏目、正文、索引搜索；未配置RSS",
+        "status": "readable",
+        "verification_note": "2026-11-13已读欧盟无人机峰会通报；区分路线图工作安排与正式文件。"
+      },
+      {
+        "id": "E46",
+        "name": "Eve Air Mobility",
+        "entry": "https://www.eveairmobility.com/",
+        "type": "原始发布机构",
+        "method": "官方详情与限定搜索试检，未验收持续采集",
+        "status": "readable",
+        "verification_note": "2026-11-11已读三季度业绩公告，官方投资者关系RSS成功解析10条；持续采集待试检。",
+        "additional_entries": [
+          "https://ir.eveairmobility.com/news-events/press-releases"
+        ],
+        "rss_url": "https://ir.eveairmobility.com/news-events/press-releases/rss"
+      },
+      {
+        "id": "E54",
+        "name": "AIRO Group 企业新闻室",
+        "type": "企业原始发布",
+        "entry": "https://theairogroup.com/news/",
+        "method": "公开目录、原文和定向检索",
+        "status": "readable",
+        "verification_note": "2026-11-12已读Jaunt民用货运意向公告；站点索引可达，直接程序请求曾失败。"
       }
     ],
     "keywords": [
@@ -12206,6 +12273,139 @@
         "frequency": "每日",
         "enabled": true,
         "verification": "核对账号身份、帖子发布时间和正文范围；平台定向检索实际返回非本平台结果时，不计作平台覆盖；原始事实回查官方文件或主体声明，访问失败保留缺口。"
+      },
+      {
+        "id": "SRC-L36",
+        "target": "广东省通信管理局",
+        "source_ids": [
+          "L36"
+        ],
+        "keyword_ids": [
+          "K09"
+        ],
+        "queries": [
+          "site:gdca.miit.gov.cn 低空 无人机 智联网 标准"
+        ],
+        "instructions": [
+          "核实际原始发布与更新日期；正文及附件分开记录；单次可读不验持续采集"
+        ],
+        "frequency": "每日",
+        "enabled": true,
+        "verification": "公开原文、主体、日期及阶段已核才采用；读取失败独立留缺口"
+      },
+      {
+        "id": "SRC-L41",
+        "target": "上海市奉贤区人民政府门户",
+        "source_ids": [
+          "L41"
+        ],
+        "keyword_ids": [
+          "K01"
+        ],
+        "queries": [
+          "site:fengxian.gov.cn 低空 无人机 配送"
+        ],
+        "instructions": [
+          "保留成文、公开与事件日期；按原文分清阶段"
+        ],
+        "frequency": "每日",
+        "enabled": true,
+        "verification": "索引试检并读原文，持续采集待验"
+      },
+      {
+        "id": "SRC-L42",
+        "target": "北京市应急管理局建议提案办理",
+        "source_ids": [
+          "L42"
+        ],
+        "keyword_ids": [
+          "K01"
+        ],
+        "queries": [
+          "site:yjglj.beijing.gov.cn 无人机 应急 救援"
+        ],
+        "instructions": [
+          "保留成文、公开与事件日期；按原文分清阶段"
+        ],
+        "frequency": "每日",
+        "enabled": true,
+        "verification": "索引试检并读原文，持续采集待验"
+      },
+      {
+        "id": "SRC-O21",
+        "target": "SESAR Joint Undertaking 文献库",
+        "source_ids": [
+          "O21"
+        ],
+        "keyword_ids": [
+          "K10"
+        ],
+        "queries": [
+          "site:sesarju.eu U-space drone operations"
+        ],
+        "instructions": [
+          "核对原始日期、阶段、正文或摘要范围；持续采集待验"
+        ],
+        "frequency": "每日",
+        "enabled": true,
+        "verification": "原文及日期核验，未访问和无合格新增分别记录"
+      },
+      {
+        "id": "SRC-O22",
+        "target": "欧盟委员会交通总司新闻",
+        "source_ids": [
+          "O22"
+        ],
+        "keyword_ids": [
+          "K10"
+        ],
+        "queries": [
+          "site:transport.ec.europa.eu/news-events/news EU drones market implementation roadmap drone operations"
+        ],
+        "instructions": [
+          "保留成文、公开与事件日期；按原文分清阶段"
+        ],
+        "frequency": "每日",
+        "enabled": true,
+        "verification": "索引试检并读原文，持续采集待验"
+      },
+      {
+        "id": "SRC-E46",
+        "target": "Eve Air Mobility投资者关系",
+        "source_ids": [
+          "E46"
+        ],
+        "keyword_ids": [
+          "K10"
+        ],
+        "frequency": "每日",
+        "enabled": true,
+        "instructions": [
+          "检查企业新闻及RSS；线索回到企业公告核实。"
+        ],
+        "verification": "记录公告原始日期，区分订单性质、交付进展和前瞻预期。",
+        "queries": [
+          "site:ir.eveairmobility.com/news-events/press-releases Eve eVTOL"
+        ]
+      },
+      {
+        "id": "SRC-E54",
+        "target": "AIRO Group 企业新闻室",
+        "source_ids": [
+          "E54"
+        ],
+        "keyword_ids": [
+          "K10"
+        ],
+        "queries": [
+          "site:theairogroup.com Jaunt cargo drone"
+        ],
+        "instructions": [
+          "核对原始日期、阶段、正文或摘要范围；持续采集待验"
+        ],
+        "frequency": "每日",
+        "enabled": true,
+        "verification": "原文及日期核验，未访问和无合格新增分别记录"
       }
     ],
     "legacy_objects": [
@@ -14908,6 +15108,13 @@
       "reason": "Add original policy, overseas operator and flying-car discovery sources after sample verification; retain candidate and date limits",
       "before_hash": "d5da1ec3ffa8648c34a48238fa036e93d23c989523e31e143e3665d025c99339",
       "after_hash": "cc4935c8c9e3eca7fb198e2ca738ab4e840ab21f0b7702ea2a656f9334c44501"
+    },
+    {
+      "version": 11,
+      "time": "2026-11-13T21:33:31.571256+08:00",
+      "reason": "纳入首批已核读政务、标准和企业原始发布源及Eve官方RSS，登记持续检索任务",
+      "before_hash": "cc4935c8c9e3eca7fb198e2ca738ab4e840ab21f0b7702ea2a656f9334c44501",
+      "after_hash": "79109c5fae104a070ab41ce41d054ef462de5348769c662188b5a7a21570cce3"
     }
   ]
 }
